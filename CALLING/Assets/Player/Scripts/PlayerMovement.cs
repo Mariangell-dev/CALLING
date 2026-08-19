@@ -5,9 +5,17 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
 
+    private Rigidbody2D rb;
+    private Vector2 input;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
-        Vector2 input = Vector2.zero;
+        input = Vector2.zero;
 
         if (Keyboard.current != null)
         {
@@ -17,18 +25,20 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.sKey.isPressed)
                 input.y -= 1;
 
-            if (Keyboard.current.dKey.isPressed)
-                input.x += 1;
-
             if (Keyboard.current.aKey.isPressed)
                 input.x -= 1;
+
+            if (Keyboard.current.dKey.isPressed)
+                input.x += 1;
         }
 
-        Vector3 movement = new Vector3(input.x, input.y, 0f);
+        input = input.normalized;
+    }
 
-       GetComponent<Rigidbody2D>().MovePosition(
-    GetComponent<Rigidbody2D>().position +
-    (Vector2)movement * speed * Time.deltaTime
-);
+    void FixedUpdate()
+    {
+        rb.MovePosition(
+            rb.position + input * speed * Time.fixedDeltaTime
+        );
     }
 }
