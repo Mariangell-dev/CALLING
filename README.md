@@ -12,8 +12,10 @@ Este es un videojuego 2D de terror y exploración. El jugador deberá recorrer u
 - Oscar Henriquez
 
 ## Funcionalidades
-
 - Movimiento del jugador
 - Exploración del mapa
 - Cámara que sigue al jugador
 - Menú
+# Atendify
+Mariangell Contreras
+Oscar Henriquez
