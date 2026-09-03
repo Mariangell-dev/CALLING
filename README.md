@@ -17,9 +17,5 @@ Este es un videojuego 2D de terror y exploración. El jugador deberá recorrer u
 - Exploración del mapa
 - Cámara que sigue al jugador
 - Menú
-# Atendify
-Mariangell Contreras
-Oscar Henriquez
-=======
 
 Rama para actualizaciones de Mariangell
