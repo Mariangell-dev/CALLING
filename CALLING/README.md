@@ -1,7 +1,5 @@
-
-# Mariangell Cabrera
-
-# Nombre del proyecto = "CALLING"
+#Mariangell Cabrera
+Rama para actualizaciones de Mariangell
 
 ## Descripción
 
@@ -13,9 +11,8 @@ Este es un videojuego 2D de terror y exploración. El jugador deberá recorrer u
 - Oscar Henriquez
 
 ## Funcionalidades
+
 - Movimiento del jugador
 - Exploración del mapa
 - Cámara que sigue al jugador
-- Menú
-
-Rama para actualizaciones de Mariangell
+- Menú de juego
