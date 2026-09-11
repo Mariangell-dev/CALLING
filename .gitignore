@@ -1,0 +1,39 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Uu]nity[Ll]ockfile
+
+# MemoryCaptures
+[Mm]emoryCaptures/
+
+# User-specific
+.vs/
+.idea/
+.vscode/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Crash reports
+sysinfo.txt
+
+# Visual Studio
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity generated
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
