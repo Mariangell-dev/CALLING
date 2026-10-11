@@ -7,10 +7,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 input;
+    private Animator animator;
+
+    private int direction = 0;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -33,6 +37,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         input = input.normalized;
+
+        // Saber si el jugador se está moviendo
+        animator.SetBool("IsMoving", input != Vector2.zero);
+
+        // Saber la dirección
+        if (input.y > 0)
+            direction = 1; // Espaldas
+        else if (input.y < 0)
+            direction = 0; // Frente
+        else if (input.x < 0)
+            direction = 2; // Izquierda
+        else if (input.x > 0)
+            direction = 3; // Derecha
+
+        animator.SetInteger("Direction", direction);
     }
 
     void FixedUpdate()
