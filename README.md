@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 
-# Atendify
-Mariangell Contreras
-Oscar Henriquez
-=======
-#Mariangell Cabrera
-Rama para actualizaciones de Mariangell
+# Mariangell Cabrera
+
+# Nombre del proyecto = "CALLING"
 
 ## Descripción
 
@@ -17,9 +13,9 @@ Este es un videojuego 2D de terror y exploración. El jugador deberá recorrer u
 - Oscar Henriquez
 
 ## Funcionalidades
-
 - Movimiento del jugador
 - Exploración del mapa
 - Cámara que sigue al jugador
-- Menú de juego
->>>>>>> 547ca1b (feat: Se agregan los archivos del proyecto)
+- Menú
+
+Rama para actualizaciones de Mariangell
