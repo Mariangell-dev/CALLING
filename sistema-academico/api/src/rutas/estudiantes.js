@@ -40,10 +40,12 @@ router.get('/resumen', (req, res) => {
 router.post('/', (req, res) => {
   const { nombre, nota } = req.body;
 
-  if (!nombre || typeof nombre !== 'string' || !nombre.trim() || !validarNota(nota)) {
-    return res.status(400).json({
-      error: 'Nombre o nota no válida'
-    });
+  // Validacion en el servidor: cualquiera puede llamar la API sin pasar por el front.
+  if (!nombre || typeof nombre !== 'string' || !nombre.trim()) {
+    return res.status(400).json({ error: 'Falta el nombre del estudiante' });
+  }
+  if (!validarNota(nota)) {
+    return res.status(400).json({ error: 'La nota debe ser un número entre 0 y 5' });
   }
   const nuevo = {
     id: Date.now(),

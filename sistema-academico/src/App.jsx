@@ -1,41 +1,43 @@
-
 import { useState, useEffect } from 'react';
 import Boton from './componentes/Boton';
 import TarjetaEstadistica from './componentes/TarjetaEstadistica';
 import FilaEstudiante from './funcionalidades/notas/FilaEstudiante';
-const NOTA_PREDETERMINADA = 3.2;
+import { obtenerEstudiantes, obtenerResumen, crearEstudiante } from './api';
 
 function App() {
   const [estudiantes, setEstudiantes] = useState([]);
   const [resumen, setResumen] = useState({ promedio: 0, aprobados: 0, total: 0 });
   const [nombre, setNombre] = useState('');
+  const [nota, setNota] = useState('');
+  const [error, setError] = useState('');
+  const [cargando, setCargando] = useState(false);
 
   useEffect(() => {
-    cargarEstudiantes();
+    cargarDatos();
   }, []);
 
-  async function cargarEstudiantes() {
-    const respuesta = await fetch('http://localhost:3000/estudiantes');
-    const datos = await respuesta.json();
-    setEstudiantes(datos);
-
-    const respuestaResumen = await fetch('http://localhost:3000/estudiantes/resumen');
-    const datosResumen = await respuestaResumen.json();
-    setResumen(datosResumen);
+  async function cargarDatos() {
+    try {
+      setEstudiantes(await obtenerEstudiantes());
+      setResumen(await obtenerResumen());
+    } catch (e) {
+      setError(e.message);
+    }
   }
 
   async function agregar() {
-    if (nombre.trim() === '') return;
-
-    const respuesta = await fetch('http://localhost:3000/estudiantes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, nota: NOTA_PREDETERMINADA })
-    });
-
-    if (respuesta.ok) {
+    setError('');
+    setCargando(true);
+    try {
+      // La validacion de verdad la hace el servidor; si algo esta mal, su mensaje se muestra aqui.
+      await crearEstudiante(nombre.trim(), nota === '' ? null : Number(nota));
       setNombre('');
-      cargarEstudiantes();
+      setNota('');
+      await cargarDatos();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setCargando(false);
     }
   }
 
@@ -67,7 +69,16 @@ function App() {
         onChange={e => setNombre(e.target.value)}
         placeholder="Nombre del estudiante"
       />
-      <Boton alHacerClic={agregar}>Agregar estudiante</Boton>
+      <input
+        type="number"
+        step="0.1"
+        value={nota}
+        onChange={e => setNota(e.target.value)}
+        placeholder="Nota (0 a 5)"
+      />
+      <Boton alHacerClic={agregar} cargando={cargando}>Agregar estudiante</Boton>
+
+      {error && <p role="alert">{error}</p>}
     </>
   );
 }

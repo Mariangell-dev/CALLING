@@ -1,3 +1,5 @@
+// La nota minima aprobatoria es 3.0. Es la unica definicion en todo el proyecto:
+// el front no la conoce, recibe el estado ya calculado desde la API.
 const NOTA_MINIMA = 3.0;
 const NOTA_MINIMA_PERMITIDA = 0;
 const NOTA_MAXIMA = 5;
