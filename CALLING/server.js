@@ -1,13 +1,19 @@
 const http = require('http');
 
-const d = [4.5, 3.5, 2.5, 4.0];
+const PUERTO = 80;
+const NOTA_MINIMA = 3.0;
+const notasDelCurso = [4.5, 3.5, 2.5, 4.0];
 
-function calcularPromedio(d) {
-  let t = 0;
-  for (let i = 0; i < d.length; i++) {
-    t += d[i];
+function calcularPromedio(notas) {
+  let suma = 0;
+  for (let i = 0; i < notas.length; i++) {
+    suma += notas[i];
   }
-  return t / d.length;
+  return suma / notas.length;
+}
+
+function estaAprobado(promedio) {
+  return promedio >= NOTA_MINIMA;
 }
 
 function responder(res, codigo, datos) {
@@ -17,7 +23,7 @@ function responder(res, codigo, datos) {
   res.end(JSON.stringify(datos, null, 2));
 }
 
-const s = http.createServer((req, res) => {
+const servidor = http.createServer((req, res) => {
   if (req.url === '/salud') {
     responder(res, 200, { estado: 'ok' });
   } else if (req.url === '/equipo') {
@@ -26,14 +32,14 @@ const s = http.createServer((req, res) => {
       integrantes: ['Mariangell Cabrera', 'Oscar Henriquez']
     });
   } else if (req.url === '/notas') {
-    const p = calcularPromedio(d);
+    const promedio = calcularPromedio(notasDelCurso);
     responder(res, 200, {
-      promedio: p,
-      aprobado: p >= 3.0
+      promedio: promedio,
+      aprobado: estaAprobado(promedio)
     });
   } else {
     responder(res, 404, { error: 'Ruta no encontrada' });
   }
 });
 
-s.listen(80);
+servidor.listen(PUERTO);
